@@ -1,0 +1,25 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: myweatherapp
+  namespace: default
+  label: myweather
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myweather
+  template:
+    metadata:
+      labels:
+        app: myweather
+    spec:
+      containers:
+        - name: myweathercont
+          image: mycluster.icp:8500/default/myweather:1.0
+          env:
+            - name: ENDPOINT_URL
+              valueFrom:
+                secretKeyRef:
+                  name: weather-secret
+                  key: url_endpoint

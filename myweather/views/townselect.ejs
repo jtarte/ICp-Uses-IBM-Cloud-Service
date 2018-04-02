@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>My Weather</title>
+  </head>
+  <body>
+  	<%- include("banner");%>
+    <BR>
+    The location service proposes several town. Make tour choice:
+    <form method="post" action="weather">
+      <% for(i=0;i<locInfo.length;i++)
+        {
+          position = locInfo[i].latitude + "," + locInfo[i].longitude;
+          myFunction = "town(\'"+locInfo[i].name+"\')";
+      %>
+  		<input type="radio" name="input" value=<%= position %>> <%= locInfo[i].name %> <BR>
+      <%
+        }
+      %>
+      <input type="hidden" name="type" value="geocode">
+  	<input type="submit">
+  	</form>
+    <BR>
+  </body>
+  </html>

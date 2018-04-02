@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>My Weather</title>
+  </head>
+  <body>
+    <%- include("banner");%>
+    <BR>
+    <% if(townTarget)
+      { %>
+    <H1> Weather forecast for : <%= townTarget %> </H1>
+    <% } %>
+
+  <%  forecast = locInfo; %>
+    <table>
+      <% for (i=0;i< forecast.length;i++)
+      {
+      %>
+      <tr>
+          <td align="center"><%= forecast[i].day %></td>
+          <% icon_night = "weathericons/icon"+forecast[i].night_icon+".png"; %>
+          <td bgcolor="blue" style="color:white">
+            <% if (forecast[i].day_icon)
+            {
+              icon_day = "weathericons/icon"+forecast[i].day_icon+".png";
+            %>
+              <table>
+                <tr>
+                  <td>
+                    <img src=<%= icon_day %> width="30" height="30">
+                  </td>
+                  <td >
+                    <%= forecast[i].day_shortcast %><br><%= forecast[i].max_temp %>
+                  </td>
+                </tr>
+              </table>
+            <% } %>
+          </td>
+          <td bgcolor="black" style="color:white">
+            <% if (forecast[i].night_icon)
+            {
+              icon_day = "weathericons/icon"+forecast[i].night_icon+".png";
+            %>
+            <table>
+              <tr>
+                <td>
+                  <img src=<%= icon_night %> width="30" height="30" >
+                </td>
+                <td>
+                  <%= forecast[i].night_shortcast %><br><%= forecast[i].min_temp %>
+                </td>
+              </tr>
+            </table>
+            <% } %>
+          </td>
+      </tr>
+      <% } %>
+    </table>
+  </body>
+  </html>
